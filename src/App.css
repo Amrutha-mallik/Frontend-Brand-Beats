@@ -1,0 +1,67 @@
+/* Compact admin layout */
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f6fa;
+  align-items: flex-start;
+}
+
+/* Narrower sidebar */
+.sidebar {
+  width: 200px;
+  background: white;
+  padding: 12px;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+}
+
+.sidebar .logo {
+  margin-bottom: 18px;
+  font-size: 18px;
+}
+
+/* Tighter main area */
+.main-content {
+  flex: 1;
+  padding: 18px;
+}
+
+/* Compact card grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Smaller cards */
+.card {
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+}
+
+.card p {
+  color: #666;
+  font-size: 13px;
+  margin: 6px 0;
+}
+
+.card h2 {
+  font-size: 20px;
+  margin-top: 6px;
+}
+
+/* Smaller stats inside card */
+.card .stat {
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+/* Reduce padding for very small screens */
+@media (max-width: 640px) {
+  .sidebar { width: 160px; padding: 10px; }
+  .main-content { padding: 12px; }
+  .card-grid { gap: 10px; }
+  .card { padding: 10px; }
+}

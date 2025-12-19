@@ -1,0 +1,143 @@
+.proposal-form-container {
+  margin-top: 20px;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid rgba(6, 80, 120, 0.06);
+  box-shadow: 0 4px 12px rgba(10, 40, 70, 0.08);
+}
+
+.proposal-form-container h2 {
+  font-size: 22px;
+  color: #0b87c1;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+/* Form */
+.proposal-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Form Fields */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0b87c1;
+}
+
+.proposal-form-container textarea,
+.proposal-form-container input[type="number"],
+.proposal-form-container input[type="file"] {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid rgba(6, 80, 120, 0.1);
+  border-radius: 8px;
+  background: #f8fbff;
+  color: #0f1724;
+  outline: none;
+  transition: border-color .12s, box-shadow .12s;
+}
+
+.proposal-form-container textarea:focus,
+.proposal-form-container input[type="number"]:focus,
+.proposal-form-container input[type="file"]:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.1);
+}
+
+.proposal-form-container textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto;
+}
+
+/* File input styling */
+.proposal-form-container input[type="file"]::file-selector-button {
+  padding: 6px 12px;
+  background: #e0f2fe;
+  color: #0b87c1;
+  border: 1px solid #0ea5e9;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  transition: background .12s;
+}
+
+.proposal-form-container input[type="file"]::file-selector-button:hover {
+  background: #cffafe;
+}
+
+/* Submit Button */
+.proposal-submit-btn {
+  padding: 12px 24px;
+  background: linear-gradient(90deg, #0ea5e9, #0b87c1);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .12s, box-shadow .12s;
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+.proposal-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.2);
+}
+
+.proposal-submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Close Button */
+.proposal-close-btn {
+  padding: 10px 16px;
+  background: #e5e7eb;
+  color: #374151;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .12s;
+}
+
+.proposal-close-btn:hover {
+  background: #d1d5db;
+}
+
+/* Button Group */
+.form-button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .proposal-form-container {
+    padding: 16px;
+  }
+  .proposal-form-container h2 {
+    font-size: 18px;
+  }
+  .proposal-submit-btn,
+  .proposal-close-btn {
+    width: 100%;
+  }
+  .form-button-group {
+    flex-direction: column;
+  }
+}

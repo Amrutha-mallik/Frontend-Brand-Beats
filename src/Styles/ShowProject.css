@@ -1,0 +1,78 @@
+/* Container for spacing */
+.projects-container {
+  width: 90%;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9fafb;
+}
+
+/* Heading */
+.projects-heading {
+  font-size: 26px;
+  font-weight: 700;
+  color: #2a2a2a;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Table */
+.projects-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 3px 12px;
+}
+
+/* Table Head */
+.projects-table thead th {
+  background: #0052cc;
+  color: #fff;
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 2px solid #003399;
+}
+
+/* Table Body */
+.projects-table tbody td {
+  padding: 12px 18px;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.projects-table tbody tr:nth-child(even) {
+  background: #fcfcfc;
+}
+
+.projects-table tbody tr:hover {
+  background: #eef3ff;
+  transition: 0.2s ease;
+}
+
+/* Button Styles */
+.btn-remove {
+  padding: 6px 12px;
+  background: #e63946;
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-remove:hover {
+  background: #c62828;
+}
+
+/* Optional smaller text for stable visuals */
+.small-text {
+  font-size: 13px;
+  color: #555;
+}

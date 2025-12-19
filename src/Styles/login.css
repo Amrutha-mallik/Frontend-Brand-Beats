@@ -1,0 +1,98 @@
+/* Login page styles - scoped to .login-container only */
+
+/* If wrapping login in a page container, use this for background */
+.login-page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #e7f7ff, #e0f3ff);
+  padding: 20px;
+}
+
+/* Container */
+.login-container{
+  width: 320px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 8px 22px rgba(10,40,70,0.06);
+  border: 1px solid rgba(6,80,120,0.06);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Heading */
+.login-container h2{
+  text-align:center;
+  margin-bottom:12px;
+  font-size:17px;
+  color:var(--accent-dark);
+  font-weight:600;
+}
+
+/* Error */
+.login-container p[style]{
+  color:#dc2626;
+  font-size:13px;
+  text-align:center;
+  margin-bottom:8px;
+}
+
+/* Form layout: compact rows */
+.login-container form{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.login-container input[type="email"],
+.login-container input[type="password"]{
+  width:100%;
+  padding:8px 10px;
+  font-size:14px;
+  background: #f7fdff;
+  border:1px solid rgba(6,80,120,0.08);
+  border-radius:7px;
+  color:#0f1724;
+  outline:none;
+  transition:box-shadow .12s, border-color .12s, transform .08s;
+  box-sizing: border-box;
+}
+
+/* Submit button (small) */
+.login-container input[type="submit"]{
+  width:100%;
+  padding:9px 10px;
+  font-size:14px;
+  background: linear-gradient(90deg, #0ea5e9, #0b87c1);
+  color:white;
+  border:0;
+  border-radius:7px;
+  cursor:pointer;
+  font-weight:600;
+  transition:transform .12s ease, box-shadow .12s ease, opacity .12s;
+  box-sizing: border-box;
+}
+
+/* Hover / focus states */
+.login-container input[type="email"]:focus,
+.login-container input[type="password"]:focus{
+  box-shadow: 0 6px 18px rgba(14,165,233,0.10);
+  border-color: rgba(14,165,233,0.9);
+  transform: translateY(-1px);
+}
+
+.login-container input[type="submit"]:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(14,165,233,0.12);
+}
+
+/* Minimal spacing for inner divs */
+.login-container form > div{ margin-bottom:0; }
+
+/* Small screens */
+@media (max-width:360px){
+  .login-container{ width: 92%; padding:12px; }
+  .login-container h2{ font-size:15px; }
+}

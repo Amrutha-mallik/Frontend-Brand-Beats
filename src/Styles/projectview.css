@@ -1,0 +1,96 @@
+/* Remove global body and :root styles */
+
+.projectview-container {
+  max-width: 800px;
+  margin: 20px auto;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 28px;
+  box-shadow: 0 4px 12px rgba(10, 40, 70, 0.08);
+  border: 1px solid rgba(6, 80, 120, 0.06);
+}
+
+/* Details Section */
+.project-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px;
+  background: #f8fbff;
+  border-radius: 8px;
+  border-left: 4px solid #0ea5e9;
+}
+
+.detail-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0b87c1;
+  min-width: 120px;
+}
+
+.detail-value {
+  font-size: 16px;
+  color: #0f1724;
+  flex: 1;
+  text-align: right;
+}
+
+/* Button Section */
+.button-section {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.send-proposal-btn {
+  padding: 12px 24px;
+  background: linear-gradient(90deg, #0ea5e9, #0b87c1);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .12s, box-shadow .12s;
+}
+
+.send-proposal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.2);
+}
+
+/* Proposal Form Container */
+.proposal-form-wrapper {
+  margin-top: 24px;
+  padding: 20px;
+  background: #f8fbff;
+  border-radius: 8px;
+  border: 2px solid #0ea5e9;
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  font-size: 18px;
+  color: #0b87c1;
+  padding: 40px;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .projectview-container { padding: 18px; }
+  .detail-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .detail-label { min-width: auto; }
+  .detail-value { text-align: left; }
+  .send-proposal-btn { width: 100%; }
+}
