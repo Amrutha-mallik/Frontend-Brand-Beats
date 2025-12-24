@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchbrand } from "../slice/producer-slice";
+import {Link} from "react-router-dom"
+import ProjectProposal from "./ProjectProposal"
 
 export default function MyProject() {
   const dispatch = useDispatch();
@@ -70,6 +72,11 @@ export default function MyProject() {
                   {project.status || "Draft"}
                 </span>
               </div>
+              <Link to={`/projectsbyproposal/${project._id}`}>
+  View Proposals
+</Link>
+
+              
             </div>
           ))}
         </div>

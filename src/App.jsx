@@ -93,8 +93,8 @@
 //   ) 
 // }
 
-import { Link, Route, Routes, useNavigate } from "react-router-dom"
-import { useContext, useEffect } from "react"
+import { Link, Route, Routes, useNavigate, Navigate  } from "react-router-dom"
+import { useContext, useEffect  } from "react"
 import UserContext from "./context/userContext"
 
 import Login from "./Pages/Login"
@@ -115,6 +115,8 @@ import ShowProject from "./Admin/ShowProject"
 import ProjectForm from "./Brands/ProjectForm"
 import Brandlist from "./Admin/Brandlist"
 import Producerlist from "./Admin/Producerlist"
+import ProjectProposal from "./Brands/ProjectProposal"
+import Proposal from "./Admin/Proposal"
 
 
 export default function App() {
@@ -139,14 +141,11 @@ export default function App() {
 
   return (
     <div>
-      <h2>Welcome to Brand Beats</h2>
 
       {/* Navigation */}
       <ul className="app-nav">
-        {isLogged ? (
+        {(isLogged || localStorage.getItem('token'))? (
           <>
-            {/* Hide admin dashboard link - admin auto-redirects to dashboard */}
-
             {user?.role === "brand" && (
               <>
                 <li><Link to="/brand-dashboard">Brand Dashboard</Link></li>
@@ -174,15 +173,15 @@ export default function App() {
           </>
         ) : (
           <>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/register">Register</Link></li>
+            {/* <li><Link to="/login">Login</Link></li>
+            <li><Link to="/register">Register</Link></li> */}
           </>
         )}
       </ul>
 
       {/* ROUTES */}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Navigate to="/register" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/MyProfile" element={<MyProfile />} />
@@ -194,6 +193,7 @@ export default function App() {
           <Route path="producers" element={<Producerlist />} />
           <Route path="brands" element={<Brandlist />} />
           <Route path="profile" element={<MyProfile />} />
+          <Route  path = "proposal" element = {<Proposal/>}/>
         </Route>
 
         {/* Brand */}
@@ -220,6 +220,8 @@ export default function App() {
         />
 
         <Route path="/projectview/:id" element={<Projectview />} />
+        <Route path="/projectsbyproposal/:id" element={<ProjectProposal />} />
+
       </Routes>
     </div>
   )

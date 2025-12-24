@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { listproducer, listbrand } from "../slice/admin-slice"
 import { fetchProjects } from "../slice/producer-slice"
+import {fetchproposal} from "../slice/brand-slice"
 
 export default function Admin() {
   const dispatch = useDispatch()
@@ -14,11 +15,12 @@ export default function Admin() {
 
   const { producer, brand } = useSelector(state => state.Admin)
   const { projects } = useSelector(state => state.Producer)
+  const {proposal} = useSelector(state => state.Brand)
 
   return (
     <>
-      <h1>Dashboard</h1>
-
+    <h2>Welcome to Admin dashboard</h2>
+      
       <div className="card-grid">
         <div className="card">
           <p>Projects</p>
@@ -35,9 +37,15 @@ export default function Admin() {
           <h2>{brand.length}</h2>
         </div>
 
+        <div  className="card">
+          <p>Proposal</p>
+          <h2>{proposal.length} </h2>
+        </div>
+
         <div className="card">
           <p>Pending Approvals</p>
           <h2>10</h2>
+
         </div>
       </div>
     </>

@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import axios from "../config/a"
 
+
 export default function Brandlist(){
 
     const {brand, isLoading}  =  useSelector((state)=>{

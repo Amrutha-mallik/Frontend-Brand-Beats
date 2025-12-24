@@ -43,6 +43,7 @@ export default function ShowProject(){
                     <th> #</th>
                     <th>Title</th>
                     <th> Brand Name</th>
+                    <th> Action</th>
                     <th></th>
                 </tr>
                 </thead>

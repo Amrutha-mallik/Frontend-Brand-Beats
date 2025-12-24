@@ -1,119 +1,89 @@
-/* Register page styles - scoped to .register-container only */
-
-/* If wrapping register in a page container, use this for background */
+/* PAGE WRAPPER */
+.login-page-wrapper,
 .register-page-wrapper {
-    background: linear-gradient(180deg, #eaf8ff 0%, #dff4ff 100%);
-    color: #0f1724;
-    min-height: 100vh;
-    padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef9ff;
 }
 
-/* Container */
-.register-container{
-    max-width: 260px;
-    margin:20px auto;
-    background: #ffffff;
-    border:1px solid rgba(3,105,161,0.06);
-    border-radius: 8px;
-    padding:14px;
-    box-shadow: 0 6px 14px rgba(3,105,161,0.06);
-    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    box-sizing: border-box;
+/* CARD */
+.auth-card {
+  width: 320px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  overflow: hidden;
+  font-family: Inter, system-ui, sans-serif;
 }
 
-/* Heading */
-.register-container h2{
-    font-size:1rem;
-    margin-bottom:10px;
-    color:var(--accent);
-    letter-spacing:0.2px;
+/* HEADER */
+.auth-header {
+  background: #4a74f5;
+  padding: 30px;
+  text-align: center;
+  color: white;
+  position: relative;
 }
 
-/* Server error block */
-.register-container > div {
-    margin-bottom:8px;
-}
-.register-container > div[style] {
-    color:var(--danger) !important;
-    font-weight:600;
-    font-size:0.88rem;
-}
-
-/* Form layout */
-.register-container form{
-    display:flex;
-    flex-direction:column;
-    gap:var(--gap);
+/* CURVE EFFECT */
+.auth-header::after {
+  content: "";
+  position: absolute;
+  bottom: -28px;
+  left: 0;
+  width: 100%;
+  height: 56px;
+  background: white;
+  border-radius: 100% 100% 0 0;
 }
 
-/* Form rows */
-.register-container label{
-    display:block;
-    color: #475569;
-    font-size:0.82rem;
-    margin-bottom:6px;
+/* TITLE */
+.auth-header h2 {
+  margin: 0;
+  font-size: 18px;
 }
 
-.register-container input[type="text"],
-.register-container input[type="email"],
-.register-container input[type="password"],
-.register-container input[type="tel"],
-.register-container select,
-.register-container input[type="url"]{
-    width:100%;
-    padding:7px 9px;
-    background: #f3fbff;
-    border:1px solid rgba(3,105,161,0.08);
-    color:#0f1724;
-    border-radius:6px;
-    outline:none;
-    transition:box-shadow .12s, border-color .1s;
-    font-size:0.88rem;
-    box-sizing: border-box;
+/* BODY */
+.auth-body {
+  padding: 36px 20px 24px;
 }
 
-.register-container input::placeholder{
-    color: rgba(15,23,36,0.35);
+/* INPUTS */
+.auth-body input,
+.auth-body select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #dbeafe;
+  font-size: 14px;
+  outline: none;
 }
 
-/* Focus state */
-.register-container input:focus,
-.register-container select:focus{
-    box-shadow: 0 6px 18px rgba(3,105,161,0.08);
-    border-color: rgba(3,105,161,0.9);
+.auth-body input:focus,
+.auth-body select:focus {
+  border-color: #4a74f5;
 }
 
-/* Select tweaks */
-.register-container select{
-    appearance:none;
-    padding-right:30px;
-    font-size:0.88rem;
+/* BUTTON */
+.auth-body input[type="submit"] {
+  background: #4a74f5;
+  color: white;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-/* Submit button */
-.register-container input[type="submit"]{
-    margin-top:6px;
-    padding:8px 10px;
-    background: linear-gradient(90deg, #0369a1, #024e6a 120%);
-    color:white;
-    border:0;
-    border-radius:6px;
-    cursor:pointer;
-    font-weight:600;
-    font-size:0.92rem;
-    transition:transform .12s ease, box-shadow .12s ease;
-    box-sizing: border-box;
-    width: 100%;
+.auth-body input[type="submit"]:hover {
+  opacity: 0.9;
 }
 
-.register-container input[type="submit"]:hover{
-    transform: translateY(-1px);
-    box-shadow: 0 8px 18px rgba(3,105,161,0.12);
-}
-
-/* Small screens */
-@media (max-width:420px){
-    .register-page-wrapper{ padding:12px; }
-    .register-container{padding:12px;}
-    .register-container h2{font-size:0.95rem;}
+/* ERROR */
+.error {
+  color: #dc2626;
+  font-size: 13px;
+  margin-bottom: 10px;
+  text-align: center;
 }

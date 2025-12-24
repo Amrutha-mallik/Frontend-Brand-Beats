@@ -57,13 +57,20 @@ export default function ProjectForm() {
         <div style={{ display: "flex", gap: 12, marginBottom: 10 }}>
           <div style={{ flex: 1 }}>
             <label style={{ display: "block", fontWeight: 600 }}>Genre</label>
-            <input
+            <select
               name="genre"
               value={project.genre}
               onChange={handleChange}
-              placeholder="e.g., Pop, EDM"
               style={{ width: "100%", padding: 10, borderRadius: 8, border: "1px solid #e5e7eb" }}
-            />
+            >
+            <option value="">Select genre</option>
+            <option value="Pop">Pop</option>
+            <option value="Rock">Rock</option>
+            <option value="Hip Hop">Hip Hop</option>
+            <option value="Electronic">Electronic</option>
+            <option value="Classical">Classical</option>
+            <option value="Jazz">Jazz</option>
+          <option value="Other">Other</option> </select>
           </div>
 
           <div style={{ width: 140 }}>
@@ -85,9 +92,10 @@ export default function ProjectForm() {
               onChange={handleChange}
               style={{ width: "100%", padding: 10, borderRadius: 8, border: "1px solid #e5e7eb" }}
             >
-              <option>Open</option>
-              <option>Closed</option>
-              <option>Draft</option>
+            <option value="Draft">Draft</option>
+            <option value="Open">Open</option>
+            <option value="InProgress">In Progress</option>
+
             </select>
           </div>
         </div>
@@ -97,7 +105,10 @@ export default function ProjectForm() {
           <input
             type="file"
             multiple
-            onChange={(e) => setProject("attachments", e.target.files)}
+            onChange={(e) =>
+        setProject({ ...project, attachments: e.target.files })
+}
+
           />
         </div>
 
@@ -126,7 +137,7 @@ export default function ProjectForm() {
               borderRadius: 8,
               fontWeight: 700,
             }}
-          >
+          >Submit
           </button>
 
           {/* <button

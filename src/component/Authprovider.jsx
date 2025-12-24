@@ -85,15 +85,8 @@ export default function AuthProvider(props){
         }
         catch(err){
             console.log(err)
-            //   let errorMsg = "Something went wrong"
-            //   if (err.response?.data?.error) {
-            //     if (Array.isArray(err.response.data.error)) {
-            // errorMsg = err.response.data.error[0].message
-            // } else {
-            //     errorMsg = err.response.data.error
-            // }
-            // }
-            userDispatch({type:"SERVER_ERROR", payload:errorMsg})
+            const backendError = err.response?.data?.error || "Login failed"
+            userDispatch({type:"SERVER_ERROR", payload:backendError})
         }
      }   
 
