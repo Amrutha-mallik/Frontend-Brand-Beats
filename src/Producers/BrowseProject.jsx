@@ -21,7 +21,8 @@ export default function BrowseProject(){
             <h2>All Projects - {projects.length}</h2>
             {projects.map((ele)=>(
                 <div key={ele._id} className="project-card"> 
-                    <h3>{ele.title}</h3>
+                    <h3> Title: {ele.title}</h3>
+                    <h3> Brand :{ele.brandId?.name}</h3>
                     
                     <Link to={`/projectview/${ele._id}`}>View</Link>
                 </div>

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../config/a"
+import {assignProducer } from "../slice/producer-slice"
 
 export const fetchproposal = createAsyncThunk("Brand/fetchproposal", async (id, {rejectWithValue})=>{
     try{
@@ -27,6 +28,17 @@ const BrandSlice = createSlice({
         .addCase(fetchproposal.rejected,(state,action )=>{
             state.isLoading= false
             state.errors = action.error.message
+        })
+        .addCase(assignProducer.fulfilled,(state, action)=>{
+            state.isLoading = false
+
+            if (action.payload?.proposals) {
+          state.proposal = action.payload.proposals;
+        }
+        })
+        .addCase(assignProducer.rejected, (state, action)=>{
+            state.isLoading = false
+            state.errors = action.payload
         })
     }
 })

@@ -32,6 +32,11 @@ export default function Projectview(){
                     <span className="detail-value">{singleProject.title}</span>
                 </div>
                 <div className="detail-row">
+                    <span className="detail-label">Email</span>
+                    <span className="detail-value">{singleProject.email}</span>
+                </div>
+
+                <div className="detail-row">
                     <span className="detail-label">DESCRIPTION</span>
                     <span className="detail-value">{singleProject.description}</span>
                 </div>

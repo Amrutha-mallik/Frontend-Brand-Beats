@@ -1,11 +1,17 @@
 import {useState} from "react"
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createProjects } from "../slice/producer-slice";
 
 export default function ProjectForm() {
+  const [submit, setSubmit] = useState(false)
+
+  const {error } =  useSelector((state)=>{
+    return state.Producer
+  })
   const[project, setProject] = useState({
       title: "",
+      email:"",
       description: "",
       genre: "",
       budget: "",
@@ -15,20 +21,49 @@ export default function ProjectForm() {
 
     const handleChange  =(e) =>{
       setProject({...project, [e.target.name]:e.target.value})
+      setSubmit(false)
     }
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = async(e) =>{
       e.preventDefault()
-      dispatch(createProjects(project))
-      navigate("/myproject")
+
+      try{
+        await dispatch(createProjects(project)).unwrap()
+         resetForm()
+         setSubmit(false)
+         navigate("/myproject")
+      }catch(err){
+        console.log(err)
+        setSubmit(true)
+      }
 
     }
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+    const resetForm = () => {
+    setProject({
+      title: "",
+      email: "",
+      description: "",
+      genre: "",
+      budget: "",
+      deadline: "",
+      status: "Draft",
+      attachments: null
+    });
+  };
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
   return (
     <div className="create-project-card" style={{ maxWidth: 800, margin: "20px auto", padding: 20 }}>
       <h2 style={{ marginBottom: 12 }}>Create Project</h2>
+
+      { submit && error && (
+        <div style={{color:"red"}}>
+          {Array.isArray(error) ? error.map((e, i) => <div key={i}>{e.message} </div>) : error}
+          </div>
+      )}
+
 
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: 10 }}>
@@ -39,6 +74,13 @@ export default function ProjectForm() {
             onChange={handleChange}
             placeholder="Project title"
             style={{ width: "100%", padding: 10, borderRadius: 8, border: "1px solid #e5e7eb" }}
+          />
+        </div>
+
+        <div style={{ marginBottom: 10 }}>
+          <label  style={{ display: "block", fontWeight: 600 }}>Email</label>
+          <input type= "text" name="email" value={project.email} onChange={handleChange}placeholder="Brand Email"
+          style={{ width: "100%", padding: 10, borderRadius: 8, border: "1px solid #e5e7eb" }}
           />
         </div>
 
@@ -106,23 +148,21 @@ export default function ProjectForm() {
             type="file"
             multiple
             onChange={(e) =>
-        setProject({ ...project, attachments: e.target.files })
-}
-
+            setProject({ ...project, attachments: e.target.files })}
           />
         </div>
 
 
         <div style={{ marginBottom: 10 }}>
-  <label style={{ fontWeight: 600 }}>Deadline</label>
-  <input
-    type="date"
-    name="deadline"
-    value={project.deadline}
-    onChange={handleChange}
-    style={{ width: "100%", padding: 10 }}
-  />
-</div>
+          <label style={{ fontWeight: 600 }}>Deadline</label>
+          <input
+          type="date"
+          name="deadline"
+          value={project.deadline}
+          onChange={handleChange}
+          style={{ width: "100%", padding: 10 }}
+        />
+        </div>
 
 
         <div style={{ display: "flex", gap: 12, marginTop: 6 }}>
@@ -139,21 +179,6 @@ export default function ProjectForm() {
             }}
           >Submit
           </button>
-
-          {/* <button
-            type="button"
-            onClick={() => resetForm()}
-            style={{
-              background: "#e5e7eb",
-              color: "#111",
-              padding: "10px 16px",
-              border: "none",
-              borderRadius: 8,
-              fontWeight: 600,
-            }}
-          >
-            Reset
-          </button> */}
         </div>
       </form>
     </div>

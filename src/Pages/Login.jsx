@@ -1,10 +1,15 @@
 import {useFormik} from "formik"
-import { useContext } from "react"
+import { useContext, useState} from "react"
 import UserContext from "../context/userContext"
 import { Link } from "react-router-dom"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
 
 import "../Styles/login.css"
 export default function Login(){
+  const [showPassword, setShowPassword] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+
+
     const { handlelogin, serverError} = useContext(UserContext)
 
     const formik = useFormik({
@@ -14,7 +19,9 @@ export default function Login(){
         },
         onSubmit:(values)=>{
             // console.log(values)
+            setSubmitted(true)
             handlelogin(values)
+            
         }  
     })
 //    
@@ -26,7 +33,7 @@ return (
       </div>
       <div className="auth-body">
         
-        {serverError && (
+        { submitted  && serverError && (
             <div className="error">
             {Array.isArray(serverError)
             ? serverError.map((err, index) => (
@@ -48,14 +55,17 @@ return (
             placeholder="Email address"
           />
 
-          <input
-            type="password"
-            name="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            placeholder="Password"
+        <div className="password-field">
+        <input
+          type={showPassword ? "text" : "password"}
+          name="password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          placeholder="Password"
           />
-
+          <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? <FaEyeSlash /> : <FaEye />} </span>
+        </div>
           <input type="submit" value="Login" />
         </form>
       </div>

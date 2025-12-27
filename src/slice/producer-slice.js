@@ -23,6 +23,7 @@ export const fetchOneProject = createAsyncThunk(
     return response.data
     }catch(err){
       console.log(err)
+      return rejectWithValue(err.response.data.error)
 
     }
   }
@@ -36,6 +37,7 @@ export const fetchbrand = createAsyncThunk("Producer/fetchbrand", async(undefine
   }
   catch(err){
     console.log(err)
+    return rejectWithValue(err.response.data.error)
   }
 })
 
@@ -47,6 +49,19 @@ export const createProjects = createAsyncThunk("Producer/fetchproject", async(va
 
   }catch(err){
     console.log(err)
+    return rejectWithValue(err.response.data.error)
+  }
+})
+
+export const assignProducer = createAsyncThunk("Producer/assignProducer", async ( {projectId, proposalId}, {rejectWithValue})=>{
+  try{
+    const response = await axios.post(`/project/${projectId}/assign/${proposalId}`, {},{headers:{Authorization:localStorage.getItem("token")}})
+    console.log(response.data)
+    return response.data
+
+  } catch(err){
+    console.log(err)
+    return rejectWithValue(err.response.data.error)
   }
 })
 
@@ -71,7 +86,7 @@ const producerSlice = createSlice({
       })
       .addCase(fetchProjects.rejected, (state, action) => {
         state.isLoading = false
-        state.error = action.error.message
+        state.error = action.payload
       })
       .addCase(fetchOneProject.fulfilled, (state, action)=>{
         state.isLoading = false
@@ -79,7 +94,7 @@ const producerSlice = createSlice({
       })
       .addCase(fetchOneProject.rejected, (state, action)=>{
         state.isLoading = false
-        state.error = action.error.message
+        state.error = action.payload
       })
       .addCase(fetchbrand.fulfilled, (state, action)=>{
         state.isLoading = false
@@ -87,7 +102,7 @@ const producerSlice = createSlice({
       })
       .addCase(fetchbrand.rejected,(state, action) =>{
         state.isLoading = false
-        state.error = action.payload.message
+        state.error = action.payload
       })
         .addCase(createProjects.pending, (state) => {
         state.isLoading = true
@@ -99,6 +114,22 @@ const producerSlice = createSlice({
         }
       })
         .addCase(createProjects.rejected, (state, action) => {
+        state.isLoading = false
+        state.error = action.payload
+      })
+      .addCase(assignProducer.fulfilled, (state, action)=>{
+        state.isLoading = false
+          const updatedProject = action.payload.project
+           const index = state.projects.findIndex(p => p._id === updatedProject._id)
+            if (index !== -1) {
+              state.projects[index] = updatedProject
+            }
+
+            if (state.singleProject && state.singleProject._id === updatedProject._id) {
+              state.singleProject = updatedProject
+            }
+          })
+      .addCase(assignProducer.rejected ,(state, action)=>{
         state.isLoading = false
         state.error = action.payload
       })

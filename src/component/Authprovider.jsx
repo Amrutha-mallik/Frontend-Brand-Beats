@@ -34,6 +34,7 @@ export default function AuthProvider(props){
 
         useEffect(() => {
         const token = localStorage.getItem('token');
+        userDispatch({ type: "SERVER_ERROR", payload: "" })
         if(token){
             const fetchUser = async () => {
                 try {

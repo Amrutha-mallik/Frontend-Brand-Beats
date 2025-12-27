@@ -1,8 +1,9 @@
 import {fetchproposal} from "../slice/brand-slice"
+import {assignProducer} from "../slice/producer-slice"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import {useParams } from "react-router-dom"
-export default function ProjectProposal(){
+export default function ProjectProposal({projectId,proposalId }){
     const dispatch = useDispatch()
     const { id } = useParams()
 
@@ -14,6 +15,11 @@ export default function ProjectProposal(){
         return state.Brand
     })
 
+    const handleassign =(proposalId)=>{
+        dispatch(assignProducer({projectId: id, proposalId}))
+        console.log( "id", proposalId)
+    }
+
     return (
         <div>
             <h2> proposals - {proposal.length}</h2>
@@ -21,7 +27,7 @@ export default function ProjectProposal(){
                 return(
                 <div key={ele._id} style={{ border: "1px solid #ccc", padding: "12px", marginBottom: "10px" }}>
                 <p><b>Producer Name:</b> {ele.producerId?.name}</p>
-                {/* <p><b>Email:</b> {ele.producerId?.email}</p> */}
+                <p><b>Email:</b> {ele.producerId?.email}</p>
 
                 <p><b>Project:</b> {ele.projectId?.title}</p>
 
@@ -39,16 +45,22 @@ export default function ProjectProposal(){
                 </a>
                 </p>
             )}
-
             {ele.proposalResume?.length > 0 && (
                 <p>
                 <b>Resume:</b>{" "}
-                <a href={ele.proposalResume[0].url} target="_blank" rel="noreferrer">
-                 View Resume
-                </a>
+                <a
+                href={`https://docs.google.com/gview?url=${ele.proposalResume[0].url}&embedded=true`}
+                target="_blank"
+                rel="noreferrer">View Resume</a>
+
                 </p>
             )}
-                
+            {ele.status == "Pending" &&(
+                <button onClick = {()=>handleassign(ele._id)}> Assign Producer</button>
+            )}
+
+            {ele.status == "Accepted" && (<span style={{ color: "green" }}>Assigned ✅</span>)}
+            
                 </div>
                 )
             })}

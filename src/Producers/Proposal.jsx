@@ -6,6 +6,7 @@ export default function Proposal({ projectId, closeForm }) {
 
   const formik = useFormik({
     initialValues: {
+      email:"",
       proposalText: "",
       priceOffer: "",
       proposalResume: null,
@@ -15,6 +16,7 @@ export default function Proposal({ projectId, closeForm }) {
     onSubmit: async (values) => {
       try {
         const formData = new FormData();
+        formData.append("email", values.email);
         formData.append("proposalText", values.proposalText);
         formData.append("priceOffer", Number(values.priceOffer));
         formData.append("projectId", projectId);
@@ -51,6 +53,10 @@ export default function Proposal({ projectId, closeForm }) {
       <h2>Send Proposal</h2>
 
       <form onSubmit={formik.handleSubmit}>
+        <div className="form-group">
+          <label> Enter Email</label>
+          <input type = "email" name="email" value={formik.values.email} onChange = {formik.handleChange}/>
+        </div>
 
         <div className="form-group">
           <label>Proposal Text</label>

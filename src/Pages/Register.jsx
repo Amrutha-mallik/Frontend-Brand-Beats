@@ -2,11 +2,15 @@ import { useState, useEffect } from "react"
 import UserContext from "../context/userContext"
 import { useContext } from "react"
 import { Link } from "react-router-dom"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
+
 
 import axios from "../config/a"
 import "../Styles/register.css"
 
 export default function Register(props){
+  const [showPassword, setShowPassword] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
     const[name, setname] = useState("")
     const[email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -29,6 +33,7 @@ export default function Register(props){
 
     const handlesubmit =(e) =>{
         e.preventDefault()
+        setSubmitted(true) 
         const formdata = {
             name,
             email,
@@ -88,7 +93,7 @@ return (
       </div>
 
       <div className="auth-body">
-        {serverError && (
+        {submitted && serverError && (
           <div className="error">
             {Array.isArray(serverError)
               ? serverError.map((e, i) => <div key={i}>{e.message}</div>)
@@ -103,7 +108,12 @@ return (
                 <Link to="/login"> Login</Link></p>
           <input type="text" placeholder="Full name" value={name} onChange={e => setname(e.target.value)} />
           <input type="email" placeholder="Email address" value={email} onChange={e => setEmail(e.target.value)} />
-          <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+          {/* <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} /> */}
+          <div className="password-field">
+          <input type={showPassword ? "text" : "password"} placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
+          <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+          {showPassword ? <FaEyeSlash /> : <FaEye />} </span> 
+          </div>
 
           <select value={role} onChange={e => setRole(e.target.value)}>
             <option value="">Select role</option>
