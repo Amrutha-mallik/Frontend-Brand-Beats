@@ -4,13 +4,25 @@ import {assignProducer } from "../slice/producer-slice"
 
 export const fetchproposal = createAsyncThunk("Brand/fetchproposal", async (id, {rejectWithValue})=>{
     try{
-        const  response = await axios.get(`projectsbyproposal/${id}`, {headers : {Authorization:localStorage.getItem("token")}} )
+        const  response = await axios.get(`/projectsbyproposal/${id}`, {headers : {Authorization:localStorage.getItem("token")}} )
         console.log( "proposal", response.data)
         return response.data
     }catch(err){
         console.log(err)
     }
 })
+
+export const myproposal = createAsyncThunk("Brand/myproposal", async ()=>{
+    try{
+        const response = await axios.get("/api/myproposal", {headers:{Authorization:localStorage.getItem("token")}})
+        console.log("proposal", response.data)
+        return response.data
+
+    }catch(err){
+        console.log(err)
+    }
+})
+
 
 const BrandSlice = createSlice({
     name:"brands",
@@ -37,6 +49,14 @@ const BrandSlice = createSlice({
         }
         })
         .addCase(assignProducer.rejected, (state, action)=>{
+            state.isLoading = false
+            state.errors = action.payload
+        })
+        .addCase(myproposal.fulfilled,(state, action)=>{
+            state.isLoading = false
+            state.proposal = action.payload
+        })
+        .addCase(myproposal.rejected,(state, action)=>{
             state.isLoading = false
             state.errors = action.payload
         })

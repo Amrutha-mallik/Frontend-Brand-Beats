@@ -52,7 +52,7 @@ return (
             name="email"
             value={formik.values.email}
             onChange={formik.handleChange}
-            placeholder="Email address"
+            placeholder=" Enter Email "
           />
 
         <div className="password-field">
@@ -61,7 +61,7 @@ return (
           name="password"
           value={formik.values.password}
           onChange={formik.handleChange}
-          placeholder="Password"
+          placeholder=" Enter Password"
           />
           <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
             {showPassword ? <FaEyeSlash /> : <FaEye />} </span>

@@ -101,12 +101,14 @@ import Login from "./Pages/Login"
 import Home from "./Pages/Home"
 import Register from "./Pages/Register"
 import MyProfile from "./Pages/MyProfile"
+import EditProfile from "./Pages/EditProfile"
 
 import Admin from "./Dashboard/Admin"
 import AdminLayout from "./Dashboard/AdminLayout"
 import Brand from "./Dashboard/Brand"
 import Producer from "./Dashboard/Producer"
 
+import MyProposal from "./Producers/MyProposal"
 import BrowseProject from "./Producers/BrowseProject"
 import PrivateRoute from "./component/PrivateRoute"
 import Projectview from "./Producers/Projectview"
@@ -117,7 +119,8 @@ import Brandlist from "./Admin/Brandlist"
 import Producerlist from "./Admin/Producerlist"
 import ProjectProposal from "./Brands/ProjectProposal"
 import Proposal from "./Admin/Proposal"
-
+import ChatPage from "./chats/ChatPage"
+import Files from "./File-upload/Files"
 
 export default function App() {
   const navigate = useNavigate()
@@ -148,7 +151,7 @@ export default function App() {
           <>
             {user?.role === "brand" && (
               <>
-                <li><Link to="/brand-dashboard">Brand Dashboard</Link></li>
+                <li><Link to={`/brand-dashboard/${user._id}}`}>Brand Dashboard</Link></li>
                 <li><Link to="/myproject">My Project</Link></li>
                 <li> <Link to ="/createproject">Create Project</Link></li>
                 
@@ -159,6 +162,7 @@ export default function App() {
               <>
                 <li><Link to="/producer-dashboard">Producer Dashboard</Link></li>
                 <li><Link to="/browserproject">Browse Project</Link></li>
+                <li><Link to = "/myproposal">My Proposal</Link></li>
               </>
             )}
 
@@ -185,6 +189,9 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/MyProfile" element={<MyProfile />} />
+        <Route path = "/edit" element={<EditProfile/>} />
+        <Route path="/chat/:id" element={<ChatPage />} />
+        <Route path ="/files" element={<Files/>}/>
 
         {/* Admin Layout Routes */}
         <Route path="/admin" element={<AdminLayout />}>
@@ -197,9 +204,15 @@ export default function App() {
         </Route>
 
         {/* Brand */}
-        <Route path="/brand-dashboard" element={<Brand />} />
+        <Route path="/brand-dashboard/:id" element={<Brand />} />
         <Route path="/myproject" element={<MyProject />} />
         <Route path="/createproject" element={<ProjectForm />} />
+
+      {/* <Route path="/brand" element={<BrandLayout />}>
+      <Route path="dashboard" element={<Brand />} />
+      <Route path="myproject" element={<MyProject />} />
+      <Route path="create" element={<ProjectForm />} />
+      </Route>         */}
 
         {/* Producer */}
         <Route
@@ -218,6 +231,7 @@ export default function App() {
             </PrivateRoute>
           }
         />
+        <Route path = "/myproposal" element = {<PrivateRoute allowRoles={["producer"]}><MyProposal/>  </PrivateRoute> }/>
 
         <Route path="/projectview/:id" element={<Projectview />} />
         <Route path="/projectsbyproposal/:id" element={<ProjectProposal />} />

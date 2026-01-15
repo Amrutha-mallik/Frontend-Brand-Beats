@@ -1,7 +1,6 @@
 import UserContext from "../context/userContext"
 import { useReducer, useEffect } from "react"
 import axios from "../config/a"
-import {Link} from "react-router-dom"
 import {  useNavigate } from "react-router-dom"
 
 
@@ -19,6 +18,9 @@ export default function AuthProvider(props){
             case "SERVER_ERROR":{
                 return {...state, serverError:action.payload}
             }
+            case "UPDATE_USER" :{
+                return {...state, user:action.payload}
+            }
             default:{
                 return {...state}
             }
@@ -30,7 +32,6 @@ export default function AuthProvider(props){
         isLogged:false,
         serverError:""
     });
-
 
         useEffect(() => {
         const token = localStorage.getItem('token');
@@ -49,6 +50,8 @@ export default function AuthProvider(props){
             fetchUser();
         }
     }, []);
+
+
 
     const handleregister = async(formdata)=>{
             try{
@@ -70,7 +73,7 @@ export default function AuthProvider(props){
             console.log(response.data)
             localStorage.setItem('token', response.data.token);
             
-            const userResponse = await axios.get('/users/account', {headers:{Authorization:localStorage.getItem("token")}})
+            const userResponse = await axios.get('/users/account', {headers:{Authorization:response.data.token}})
             const role = userResponse.data.role;
             alert("successfully logged in")
             userDispatch({type:"LOG_IN", payload:userResponse.data})
@@ -95,8 +98,25 @@ export default function AuthProvider(props){
         localStorage.removeItem("token")
         userDispatch({type: "LOG_OUT"})
     }
+
+    const handleUpdateUser = async(formData) =>{
+        try{
+            const token = localStorage.getItem("token")
+            const response = await axios.put(
+                `/users/update/${userState.user._id}`,
+                formData,
+                { headers: { Authorization: token } }
+            )
+            userDispatch({type: "UPDATE_USER", payload: response.data})
+            alert("Profile updated successfully")
+        }catch(err){
+            console.log(err)
+            userDispatch({type:"SERVER_ERROR", payload:"Update failed"})
+        }
+    }
+
    return (
-    <UserContext.Provider value ={{ ...userState, handleregister,handlelogin , handlelogout}}>
+    <UserContext.Provider value ={{ ...userState, handleregister,handlelogin , handlelogout, handleUpdateUser}}>
         {props.children}
     </UserContext.Provider>  
    )

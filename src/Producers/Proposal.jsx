@@ -1,8 +1,10 @@
 import { useFormik } from "formik";
 import axios from "../config/a";
+import { useNavigate } from "react-router-dom";
 import "../Styles/proposal.css";
 
 export default function Proposal({ projectId, closeForm }) {
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -40,6 +42,8 @@ export default function Proposal({ projectId, closeForm }) {
         alert("Proposal sent successfully!");
         console.log(response.data);
         closeForm();
+        navigate("/myproposal")
+
 
       } catch (err) {
         console.log(err);

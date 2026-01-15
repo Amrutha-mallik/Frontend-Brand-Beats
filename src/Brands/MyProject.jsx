@@ -8,7 +8,7 @@ export default function MyProject() {
   const dispatch = useDispatch();
   const { projects, isLoading } = useSelector((state) => state.Producer);
 
-  // Always fetch brand projects on mount to show latest data
+  
   useEffect(() => {
     dispatch(fetchbrand());
   }, [dispatch]);
@@ -54,11 +54,16 @@ export default function MyProject() {
                   <strong style={{ color: "#0b87c1" }}>Genre:</strong> {project.genre || "—"}
                 </p>
                 <p style={{ margin: 0, color: "#444" }}>
+                  <strong style={{ color: "#0b87c1" }}>Deadline:</strong>{" "}
+                        {project.deadline
+                    ? new Date(project.deadline).toLocaleDateString("en-GB") : "—"}
+                </p>
+                <p style={{ margin: 0, color: "#444" }}>
                   <strong style={{ color: "#0b87c1" }}>Budget:</strong> ₹{project.budget || "0"}
                 </p>
               </div>
 
-              <div style={{ marginTop: "12px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ marginTop: "12px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "10px", flexWrap: "wrap" }}>
                 <span
                   style={{
                     fontSize: "12px",
@@ -72,9 +77,40 @@ export default function MyProject() {
                   {project.status || "Draft"}
                 </span>
               </div>
-              <Link to={`/projectsbyproposal/${project._id}`}>
-  View Proposals
-</Link>
+              <div style={{ marginTop: "12px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                <Link to={`/projectsbyproposal/${project._id}`} style={{ flex: 1, textDecoration: "none" }}>
+                  <button style={{ width: "100%", padding: "8px 12px", background: "#0b87c1", color: "white", border: "none", borderRadius: "6px", cursor: "pointer" }}>
+                    View Proposals
+                  </button>
+                </Link>
+                {project.producerId ? (
+                  <>
+                  <Link to={`/chat/${project._id}`} style={{ flex: 1, textDecoration: "none" }}>
+                    <button style={{ width: "100%", padding: "8px 12px", background: "#10b981", color: "white", border: "none", borderRadius: "6px", cursor: "pointer" }}>
+                      💬 Chat
+                    </button>
+                  </Link>
+                  <Link to="/files" style={{ flex: 1, textDecoration: "none" }}> 
+                  <button style={{ width: "100%", padding: "8px 12px", background: "#10b981", color: "white", border: "none", borderRadius: "6px", cursor: "pointer" }}> UPLOAD FILES </button>
+                  </Link>
+                  </>
+                ) : (
+                  <button 
+                    disabled style={{ 
+                      width: "100%", 
+                      padding: "8px 12px", 
+                      background: "#ccc", 
+                      color: "#999", 
+                      border: "none", 
+                      borderRadius: "6px", 
+                      cursor: "not-allowed" 
+                    }}
+                    title="Assign a producer first to enable chat"
+                  >
+                    Chat (No Producer)
+                  </button>
+                )}
+              </div>
 
               
             </div>
