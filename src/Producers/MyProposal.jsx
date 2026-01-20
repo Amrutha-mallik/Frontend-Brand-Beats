@@ -49,7 +49,7 @@ export default function MyProposal(){
                                             Chat
                                         </button>
                                     </Link>
-                                    <Link to="/files">
+                                    <Link to={`/producer/files/${ele.projectId?._id}`}>
                                     <button style={{ padding: "8px 16px", background: "#10b981", color: "white", border: "none", borderRadius: "6px", cursor: "pointer" }}>
                                         Upload Files </button>
                                     </Link>

@@ -1,7 +1,9 @@
 // src/components/chat/MessageInput.jsx
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function MessageInput({ socket, projectId, userId, otherUserId, setMessages, userRole }) {
+  const navigate = useNavigate()
   const [text, setText] = useState("");
   const [isSending, setIsSending] = useState(false);
 
@@ -67,6 +69,14 @@ function MessageInput({ socket, projectId, userId, otherUserId, setMessages, use
       sendMessage();
     }
   };
+  const handleCancel = () => {
+  const roleRoutes = {
+    producer: "/producer/myproposals",
+    brand: "/brand/createproject",
+  };
+
+  navigate(roleRoutes[userRole] || "/");
+};
 
   return (
     <div style={{ display: "flex", padding: "12px 16px", borderTop: "1px solid #ddd", background: "#fff", gap: "8px", alignItems: "flex-end" }}>
@@ -112,6 +122,7 @@ function MessageInput({ socket, projectId, userId, otherUserId, setMessages, use
       >
         {isSending ? "Sending..." : "Send"}
       </button>
+      <button onClick={handleCancel}>Cancel</button>
     </div>
   );
 }

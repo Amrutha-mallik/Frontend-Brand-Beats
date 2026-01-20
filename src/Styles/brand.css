@@ -1,0 +1,59 @@
+.brand-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: #f1f5f9;
+}
+
+/* Sidebar */
+.brand-sidebar {
+  width: 240px;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding: 20px;
+}
+
+.brand-logo {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+/* Nav */
+.brand-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.side-link {
+  padding: 10px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #0f172a;
+  font-weight: 500;
+}
+
+.side-link.active {
+  background: #0ea5e9;
+  color: #ffffff;
+}
+
+/* MAIN CONTENT AREA */
+.brand-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;   /* CENTER CONTENT */
+  padding: 24px;
+}
+
+/* INNER FIXED WIDTH CONTAINER */
+.brand-content > * {
+  width: 100%;
+  max-width: 900px;          /* ⭐ SAME SIZE FOR ALL PAGES */
+}
+.page-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}

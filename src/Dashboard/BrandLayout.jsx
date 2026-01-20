@@ -1,59 +1,56 @@
-// import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
+import { useContext } from "react"
+import "../Styles/brand.css";
+import UserContext from "../context/userContext"
+import { useNavigate } from "react-router-dom";
 
-// export default function BrandLayout() {
-//   return (
-//     <div style={styles.wrapper}>
-//       {/* Sidebar */}
-//       <aside style={styles.sidebar}>
-//         <h3 style={styles.logo}>Brand</h3>
 
-//         <nav style={styles.nav}>
-//           <Link style={styles.navItem} to="/brand-dashboard">Dashboard</Link>
-//           <Link style={styles.navItem} to="/createproject">Create New Project</Link>
-//           <Link style={styles.navItem} to="/myproject">My Projects</Link>
-//           <Link style={styles.navItem} to="/MyProfile">Profile</Link>
-//         </nav>
-//       </aside>
+export default function BrandLayout() {
+    const navigate = useNavigate()
+     const { handlelogout } = useContext(UserContext)
 
-//       {/* Main content */}
-//       <main style={styles.content}>
-//         <Outlet />
-//       </main>
-//     </div>
-//   );
-// }
 
-// const styles = {
-//   wrapper: {
-//     display: "flex",
-//     minHeight: "100vh",
-//     background: "#f8fafc"
-//   },
-//   sidebar: {
-//     width: 240,
-//     background: "#ffffff",
-//     borderRight: "1px solid #e5e7eb",
-//     padding: 20
-//   },
-//   logo: {
-//     marginBottom: 30,
-//     fontSize: 22,
-//     fontWeight: 700
-//   },
-//   nav: {
-//     display: "flex",
-//     flexDirection: "column",
-//     gap: 14
-//   },
-//   navItem: {
-//     textDecoration: "none",
-//     color: "#334155",
-//     fontWeight: 500,
-//     padding: "10px 12px",
-//     borderRadius: 8
-//   },
-//   content: {
-//     flex: 1,
-//     padding: 30
-//   }
-// };
+    const handleLogoutClick = () => {
+    handlelogout()
+    navigate("/login")
+  }
+  return (
+    <div className="brand-wrapper">
+      <aside className="brand-sidebar">
+        <h3 className="brand-logo">Brand</h3>
+
+        <nav className="brand-nav">
+          <NavLink to="dashboard" className="side-link">Dashboard</NavLink>
+          <NavLink to="createproject" className="side-link">Create Project</NavLink>
+          <NavLink to="myproject" className="side-link">My Projects</NavLink>
+          <NavLink to="uploadedfiles" className="side-link" >UpLoaded Files</NavLink>
+          <NavLink to="profile" className="side-link">Profile</NavLink>
+          <button
+          onClick={handleLogoutClick}
+          style={{
+            width: "100%",
+            padding: "8px 10px",
+            margin: 0,
+            color: "#fff",
+            background: "#ef4444",
+            border: "none",
+            borderRadius: "6px",
+            fontSize: "14px",
+            fontWeight: "600",
+            cursor: "pointer",
+            transition: "background 0.2s",
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.background = "#dc2626"}
+          onMouseLeave={(e) => e.currentTarget.style.background = "#ef4444"}
+        >
+          Logout
+        </button>
+        </nav>
+      </aside>
+
+      <main className="brand-content">
+        <Outlet />
+      </main>
+    </div>
+  );
+}

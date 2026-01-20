@@ -121,6 +121,9 @@ import ProjectProposal from "./Brands/ProjectProposal"
 import Proposal from "./Admin/Proposal"
 import ChatPage from "./chats/ChatPage"
 import Files from "./File-upload/Files"
+import BrandLayout from "./Dashboard/BrandLayout"
+import ProducerLayout from "./Dashboard/ProducerLayout"
+import UploadedFiles from "./Brands/UploadedFiles"
 
 export default function App() {
   const navigate = useNavigate()
@@ -145,50 +148,12 @@ export default function App() {
   return (
     <div>
 
-      {/* Navigation */}
-      <ul className="app-nav">
-        {(isLogged || localStorage.getItem('token'))? (
-          <>
-            {user?.role === "brand" && (
-              <>
-                <li><Link to={`/brand-dashboard/${user._id}}`}>Brand Dashboard</Link></li>
-                <li><Link to="/myproject">My Project</Link></li>
-                <li> <Link to ="/createproject">Create Project</Link></li>
-                
-              </>
-            )}
-
-            {user?.role === "producer" && (
-              <>
-                <li><Link to="/producer-dashboard">Producer Dashboard</Link></li>
-                <li><Link to="/browserproject">Browse Project</Link></li>
-                <li><Link to = "/myproposal">My Proposal</Link></li>
-              </>
-            )}
-
-            {/* Only show My Profile and Logout if NOT admin (admin has these in sidebar) */}
-            {user?.role !== "admin" && (
-              <>
-                <li><Link to="/MyProfile">My Profile</Link></li>
-                <li><Link to="/">Home</Link></li>
-                <button onClick={handlelogoutClick}>Logout</button>
-              </>
-            )}
-          </>
-        ) : (
-          <>
-            {/* <li><Link to="/login">Login</Link></li>
-            <li><Link to="/register">Register</Link></li> */}
-          </>
-        )}
-      </ul>
-
       {/* ROUTES */}
       <Routes>
         <Route path="/" element={<Navigate to="/register" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/MyProfile" element={<MyProfile />} />
+        {/* <Route path="/MyProfile" element={<MyProfile />} /> */}
         <Route path = "/edit" element={<EditProfile/>} />
         <Route path="/chat/:id" element={<ChatPage />} />
         <Route path ="/files" element={<Files/>}/>
@@ -204,39 +169,26 @@ export default function App() {
         </Route>
 
         {/* Brand */}
-        <Route path="/brand-dashboard/:id" element={<Brand />} />
-        <Route path="/myproject" element={<MyProject />} />
-        <Route path="/createproject" element={<ProjectForm />} />
-
-      {/* <Route path="/brand" element={<BrandLayout />}>
-      <Route path="dashboard" element={<Brand />} />
-      <Route path="myproject" element={<MyProject />} />
-      <Route path="create" element={<ProjectForm />} />
-      </Route>         */}
+        <Route path="/brand" element={<BrandLayout />}>
+          <Route path="dashboard" element={<Brand />} />
+          <Route path="createproject" element={<ProjectForm />} />
+          <Route path="myproject" element={<MyProject />} />
+          <Route path="profile" element={<MyProfile />} />
+          <Route path="myproject/projectsbyproposal/:id" element={<ProjectProposal />}/>
+          <Route path="myproject/uploadedfiles/:projectId" element = {<UploadedFiles/>}/>
+        </Route>
 
         {/* Producer */}
-        <Route
-          path="/producer-dashboard"
-          element={
-            <PrivateRoute allowRoles={["producer"]}>
-              <Producer />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/browserproject"
-          element={
-            <PrivateRoute allowRoles={["producer"]}>
-              <BrowseProject />
-            </PrivateRoute>
-          }
-        />
-        <Route path = "/myproposal" element = {<PrivateRoute allowRoles={["producer"]}><MyProposal/>  </PrivateRoute> }/>
-
-        <Route path="/projectview/:id" element={<Projectview />} />
-        <Route path="/projectsbyproposal/:id" element={<ProjectProposal />} />
-
-      </Routes>
+        <Route path="/producer" element={<PrivateRoute allowRoles={["producer"]}><ProducerLayout /></PrivateRoute>}>
+          <Route path="dashboard" element={<Producer />} />
+          <Route path="browseprojects" element={<BrowseProject />} />
+          <Route path="myproposals" element={<MyProposal />} />
+          <Route path="profile" element={<MyProfile />} />
+          <Route path ="files/:projectId" element={<Files/>}/>
+          <Route path="projectview/:id" element={<Projectview />} />
+           <Route  />
+        </Route>
+    </Routes>
     </div>
   )
 }

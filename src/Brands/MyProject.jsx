@@ -18,35 +18,35 @@ export default function MyProject() {
   }
 
   return (
-    <div style={{ maxWidth: 700, margin: "0 auto", padding: "20px" }}>
+    <div className="page-card">
       <h2 style={{ textAlign: "center", color: "#0b87c1", marginBottom: "24px" }}>My Projects</h2>
 
       {!projects || projects.length === 0 ? (
-        <div style={{ textAlign: "center", padding: "40px 20px" }}>
+        <div style={{ textAlign: "center", padding: "20px 10px" }}>
           <p style={{ fontSize: "16px", color: "#666" }}>No projects found</p>
           <p style={{ fontSize: "14px", color: "#999" }}>Create a new project to get started</p>
         </div>
       ) : (
-        <div style={{ display: "grid", gap: "16px" }}>
+        <div style={{ display: "grid", gap: "10px" }}>
           {projects.map((project) => (
             <div
               key={project._id}
               style={{
                 background: "#ffffff",
                 border: "1px solid #e5e7eb",
-                borderRadius: "10px",
-                padding: "16px",
+                borderRadius: "5px",
+                padding: "10px",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
                 transition: "box-shadow 0.2s",
               }}
               onMouseEnter={(e) => e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.12)"}
               onMouseLeave={(e) => e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.08)"}
             >
-              <h3 style={{ color: "#0f1724", marginBottom: "12px", fontSize: "18px" }}>
+              <h3 style={{ color: "#0f1724", marginBottom: "6px", fontSize: "14px" }}>
                 {project.title || "Untitled"}
               </h3>
 
-              <div style={{ display: "grid", gap: "8px", fontSize: "14px" }}>
+              <div style={{ display: "grid", gap: "8px", fontSize: "12px" }}>
                 <p style={{ margin: 0, color: "#444" }}>
                   <strong style={{ color: "#0b87c1" }}>Description:</strong> {project.description || "—"}
                 </p>
@@ -67,7 +67,7 @@ export default function MyProject() {
                 <span
                   style={{
                     fontSize: "12px",
-                    fontWeight: "600",
+                    fontWeight: "400",
                     background: project.status === "Open" ? "#d1fae5" : "#fef3c7",
                     color: project.status === "Open" ? "#065f46" : "#92400e",
                     padding: "6px 12px",
@@ -78,31 +78,34 @@ export default function MyProject() {
                 </span>
               </div>
               <div style={{ marginTop: "12px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
-                <Link to={`/projectsbyproposal/${project._id}`} style={{ flex: 1, textDecoration: "none" }}>
-                  <button style={{ width: "100%", padding: "8px 12px", background: "#0b87c1", color: "white", border: "none", borderRadius: "6px", cursor: "pointer" }}>
+                <Link to={`projectsbyproposal/${project._id}`} style={{ flex: 1, textDecoration: "none" }}>
+                  <button style={{ width: "80%", padding: "4px 6px", background: "#0b87c1", color: "white", border: "none", borderRadius: "3px", cursor: "pointer" }}>
                     View Proposals
                   </button>
                 </Link>
                 {project.producerId ? (
                   <>
                   <Link to={`/chat/${project._id}`} style={{ flex: 1, textDecoration: "none" }}>
-                    <button style={{ width: "100%", padding: "8px 12px", background: "#10b981", color: "white", border: "none", borderRadius: "6px", cursor: "pointer" }}>
+                    <button style={{ width: "80%", padding: "4px 6px", background: "#10b981", color: "white", border: "none", borderRadius: "3px", cursor: "pointer" }}>
                       💬 Chat
                     </button>
                   </Link>
-                  <Link to="/files" style={{ flex: 1, textDecoration: "none" }}> 
-                  <button style={{ width: "100%", padding: "8px 12px", background: "#10b981", color: "white", border: "none", borderRadius: "6px", cursor: "pointer" }}> UPLOAD FILES </button>
-                  </Link>
+                  <Link to={`uploadedfiles/${project._id}`} style={{ flex: 1, textDecoration: "none" }}>
+                    <button style={{ width: "80%", padding: "4px 6px", background: "#10b981", color: "white", border: "none", borderRadius: "3px", cursor: "pointer" }}>
+                      upload files
+                    </button>
+                  </Link>                  
+
                   </>
                 ) : (
                   <button 
                     disabled style={{ 
-                      width: "100%", 
-                      padding: "8px 12px", 
+                      width: "60%", 
+                      padding: "4px 6px", 
                       background: "#ccc", 
                       color: "#999", 
                       border: "none", 
-                      borderRadius: "6px", 
+                      borderRadius: "3px", 
                       cursor: "not-allowed" 
                     }}
                     title="Assign a producer first to enable chat"

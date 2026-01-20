@@ -42,7 +42,7 @@ export default function Proposal({ projectId, closeForm }) {
         alert("Proposal sent successfully!");
         console.log(response.data);
         closeForm();
-        navigate("/myproposal")
+        navigate("producer/myproposal")
 
 
       } catch (err) {

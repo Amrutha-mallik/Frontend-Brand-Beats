@@ -31,7 +31,7 @@ export default function ProjectForm() {
         await dispatch(createProjects(project)).unwrap()
          resetForm()
          setSubmit(false)
-         navigate("/myproject")
+         navigate("/brand/myproject")
       }catch(err){
         console.log(err)
         setSubmit(true)
@@ -55,7 +55,7 @@ export default function ProjectForm() {
     const dispatch = useDispatch();
 
   return (
-    <div className="create-project-card" style={{ maxWidth: 800, margin: "20px auto", padding: 20 }}>
+    <div className="create-project-card" >
       <h2 style={{ marginBottom: 12 }}>Create Project</h2>
 
       { submit && error && (

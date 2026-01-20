@@ -81,9 +81,9 @@ export default function AuthProvider(props){
             if(role == "admin"){
                 navigate("/admin/dashboard")
             } else if(role =="brand"){
-                navigate("/brand-dashboard")
+                navigate("/brand/dashboard")
             } else if(role =="producer"){
-                navigate("/producer-dashboard")
+                navigate("/producer/dashboard")
             }
             
         }

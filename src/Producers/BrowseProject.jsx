@@ -24,7 +24,7 @@ export default function BrowseProject(){
                     <h3> Title: {ele.title}</h3>
                     <h3> Brand :{ele.brandId?.name}</h3>
                     
-                    <Link to={`/projectview/${ele._id}`}>View</Link>
+                    <Link to={`/producer/projectview/${ele._id}`}>View</Link>
                 </div>
             ))}
         </div>
