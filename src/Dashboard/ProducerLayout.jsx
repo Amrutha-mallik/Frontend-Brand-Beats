@@ -31,6 +31,7 @@ export default function ProducerLayout() {
             Profile
           </Link>
           <Link to = "files/:projectId" className="producer-link"> File</Link>
+          
         </nav>
 
         <button className="producer-logout" onClick={logout}>

@@ -47,7 +47,8 @@ export default function Brandlist(){
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
-                    <th>Action</th>
+                    <th>Approve Status</th>
+                    <th>Action 1</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,6 +59,7 @@ export default function Brandlist(){
                                 <td>{ele.name}</td>
                                 <td>{ele.email}</td>
                                 <td>{ele.role}</td>
+                                <td> {ele.isApproved ? "Approved" : "Pending"}</td>
 
                                 <td><button onClick = {()=>handleremove(ele._id)}>remove</button></td>
                             </tr>

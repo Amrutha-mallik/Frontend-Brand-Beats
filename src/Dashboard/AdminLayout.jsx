@@ -24,7 +24,7 @@ export default function AdminLayout() {
         <NavLink to="/admin/producers">Producers</NavLink>
         <NavLink to="/admin/proposal">Proposal</NavLink>
         <NavLink to="/admin/brands">Brands</NavLink>
-        <NavLink to="/admin/settings">Settings</NavLink>
+        <NavLink to="/admin/proposalpending">Pending Approvals</NavLink>
 
         {/* Divider */}
         <hr style={{ margin: "12px 0", border: "none", borderTop: "1px solid #e5e7eb" }} />

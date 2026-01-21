@@ -8,7 +8,6 @@ export default function UploadedFiles(){
 
     useEffect(()=>{
         dispatch(fetchFilesByProjectId(projectId))
-
     },[])
 
     const{data}= useSelector((state)=>{
@@ -26,18 +25,8 @@ export default function UploadedFiles(){
                         <br/>
                         <a href={ele.fileUrl} target="_blank" rel="noreferrer" style={{ color: "blue" }}>
                             View / Download </a>
-                            <span
-  style={{
-    color:
-      ele.approvalStatus === "approved"
-        ? "green"
-        : ele.approvalStatus === "rejected"
-        ? "red"
-        : ""
-  }}
->
-  {ele.approvalStatus.toUpperCase()}
-</span>
+                            <span style={{color:ele.approvalStatus === "approved"? "green": ele.approvalStatus === "rejected"? "red": ""}}>
+                            {ele.approvalStatus.toUpperCase()}</span>
                             <button 
                             onClick={()=>{dispatch(approveFile({ id: ele._id, status: "approved" }))}}>Approve</button>
                             <button onClick = {()=>{dispatch(approveFile({ id: ele._id, status: "rejected" }))}}>Reject</button>

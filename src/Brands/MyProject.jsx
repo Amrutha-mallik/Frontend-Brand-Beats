@@ -34,6 +34,8 @@ export default function MyProject() {
               style={{
                 background: "#ffffff",
                 border: "1px solid #e5e7eb",
+                // WebkitLineClamp: 2,     // 👈 change to 1, 2, or 3 lines
+                // WebkitBoxOrient: "vertical",
                 borderRadius: "5px",
                 padding: "10px",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
@@ -47,10 +49,10 @@ export default function MyProject() {
               </h3>
 
               <div style={{ display: "grid", gap: "8px", fontSize: "12px" }}>
-                <p style={{ margin: 0, color: "#444" }}>
+                <p style={{ margin: 0, color: "#444" }}  >
                   <strong style={{ color: "#0b87c1" }}>Description:</strong> {project.description || "—"}
                 </p>
-                <p style={{ margin: 0, color: "#444" }}>
+                <p style={{ margin: 0, color: "#444", WebkitLineClamp:3, WebkitBoxOrient:"vertical", display: "-webkit-box", overflow: "hidden", textOverflow: "ellipsis"}}>
                   <strong style={{ color: "#0b87c1" }}>Genre:</strong> {project.genre || "—"}
                 </p>
                 <p style={{ margin: 0, color: "#444" }}>

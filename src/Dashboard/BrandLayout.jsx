@@ -4,26 +4,29 @@ import "../Styles/brand.css";
 import UserContext from "../context/userContext"
 import { useNavigate } from "react-router-dom";
 
-
 export default function BrandLayout() {
     const navigate = useNavigate()
-     const { handlelogout } = useContext(UserContext)
+    const {handlelogout, user} = useContext(UserContext)
 
+    const isApproved = user?.isApproved
 
     const handleLogoutClick = () => {
     handlelogout()
     navigate("/login")
   }
+    const disabledLink = !isApproved ? "side-link disabled" : "side-link"
+
   return (
     <div className="brand-wrapper">
       <aside className="brand-sidebar">
         <h3 className="brand-logo">Brand</h3>
 
         <nav className="brand-nav">
+          
           <NavLink to="dashboard" className="side-link">Dashboard</NavLink>
-          <NavLink to="createproject" className="side-link">Create Project</NavLink>
-          <NavLink to="myproject" className="side-link">My Projects</NavLink>
-          <NavLink to="uploadedfiles" className="side-link" >UpLoaded Files</NavLink>
+          <NavLink to={isApproved ? "createproject" : "#"} className={disabledLink}>Create Project</NavLink>
+          <NavLink to={isApproved ? "myproject" : "#"}className={disabledLink}>My Projects</NavLink>
+          <NavLink to={isApproved ? "uploadedfiles" : "#"}className={disabledLink}>Uploaded Files</NavLink>
           <NavLink to="profile" className="side-link">Profile</NavLink>
           <button
           onClick={handleLogoutClick}
@@ -45,9 +48,9 @@ export default function BrandLayout() {
         >
           Logout
         </button>
+        
         </nav>
       </aside>
-
       <main className="brand-content">
         <Outlet />
       </main>

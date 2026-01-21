@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { listproducer, listbrand } from "../slice/admin-slice"
+import { listproducer, listbrand, pendingbrands } from "../slice/admin-slice"
 import { fetchProjects } from "../slice/producer-slice"
 import {fetchproposal} from "../slice/brand-slice"
 
@@ -11,9 +11,10 @@ export default function Admin() {
     dispatch(listproducer())
     dispatch(listbrand())
     dispatch(fetchProjects())
+    dispatch(pendingbrands())
   }, [])
 
-  const { producer, brand } = useSelector(state => state.Admin)
+  const { producer, brand, pendingBrands } = useSelector(state => state.Admin)
   const { projects } = useSelector(state => state.Producer)
   const {proposal} = useSelector(state => state.Brand)
 
@@ -44,7 +45,7 @@ export default function Admin() {
 
         <div className="card">
           <p>Pending Approvals</p>
-          <h2>10</h2>
+          <h2>{pendingBrands.length}</h2>
 
         </div>
       </div>
