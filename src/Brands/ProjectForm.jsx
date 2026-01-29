@@ -16,7 +16,9 @@ export default function ProjectForm() {
       genre: "",
       budget: "",
       deadline: "",
-      status: "Draft"
+      status: "Draft",
+      attachments:[]
+      
     })
 
     const handleChange  =(e) =>{
@@ -148,7 +150,7 @@ export default function ProjectForm() {
             type="file"
             multiple
             onChange={(e) =>
-            setProject({ ...project, attachments: e.target.files })}
+            setProject({ ...project, attachments:Array.from(e.target.files) })}
           />
         </div>
 

@@ -18,19 +18,19 @@ export default function ProducerLayout() {
         <h3 className="producer-logo">Producer</h3>
 
         <nav className="producer-nav">
-          <NavLink to="dashboard" className="producer-link">
+          <Link to="dashboard" className="producer-link">
             Dashboard
-          </NavLink>
-          <NavLink to="browseprojects" className="producer-link">
+          </Link>
+          <Link to="browseprojects" className="producer-link">
             Browse Projects
-          </NavLink>
-          <NavLink to="myproposals" className="producer-link">
+          </Link>
+          <Link to="myproposals" className="producer-link">
             My Proposals
-          </NavLink>
+          </Link>
           <Link to="profile" className="producer-link">
             Profile
           </Link>
-          <Link to = "files/:projectId" className="producer-link"> File</Link>
+          {/* <Link to = "files/:projectId" className="producer-link"> File</Link> */}
           
         </nav>
 

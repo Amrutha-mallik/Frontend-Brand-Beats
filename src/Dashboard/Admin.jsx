@@ -38,10 +38,10 @@ export default function Admin() {
           <h2>{brand.length}</h2>
         </div>
 
-        <div  className="card">
+        {/* <div  className="card">
           <p>Proposal</p>
           <h2>{proposal.length} </h2>
-        </div>
+        </div> */}
 
         <div className="card">
           <p>Pending Approvals</p>

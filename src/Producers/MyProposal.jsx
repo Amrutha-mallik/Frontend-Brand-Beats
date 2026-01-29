@@ -1,14 +1,24 @@
 import {myproposal} from "../slice/brand-slice"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+const ITEMS_PER_PAGE = 4
 
 export default function MyProposal(){
+    const[currentPage, setCurrentPage] = useState(1)
+    
     const dispatch = useDispatch()
     const {proposal} = useSelector((state)=>{
         return state.Brand
     })
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+
+    const currentProposals = proposal.slice(
+        startIndex,
+        startIndex + ITEMS_PER_PAGE
+    )
+    const totalPages = Math.ceil(proposal.length / ITEMS_PER_PAGE)
 
     useEffect(()=>{
         dispatch(myproposal())
@@ -21,7 +31,7 @@ export default function MyProposal(){
                 <p style={{ textAlign: "center", color: "#999" }}> No Proposal found</p>
             ) : (
             <div style={{ display: "grid", gap: "16px" }}>
-                {proposal.map((ele)=>{
+                {currentProposals.map((ele)=>{
                     return(
                         <div key={ele._id} style={{ border: "1px solid #e5e7eb", borderRadius: "8px", padding: "16px", background: "#fff" }}>
                             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr auto", gap: "12px", alignItems: "center" }}>
@@ -59,10 +69,38 @@ export default function MyProposal(){
                         </div>
                     )
                 })}
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "16px",
+                    marginTop: "24px"
+                    }}>
+                        <button disabled={currentPage === 1}onClick={() => setCurrentPage(currentPage - 1)}
+                        style={{
+                            padding: "8px 14px",
+                            borderRadius: "6px",
+                            border: "none",
+                            background: "#0b87c1",
+                            color: "white",
+                            cursor: "pointer",
+                            opacity: currentPage === 1 ? 0.5 : 1
+                        }}>Prev</button>
+                        <span style={{ fontWeight: "600", color: "#555" }}>Page {currentPage} of {totalPages}</span>
+                        <button disabled={currentPage === totalPages}onClick={() => setCurrentPage(currentPage + 1)}
+                        style={{
+                            padding: "8px 14px",
+                            borderRadius: "6px",
+                            border: "none",
+                            background: "#0b87c1",
+                            color: "white",
+                            cursor: "pointer",
+                            opacity: currentPage === totalPages ? 0.5 : 1
+                        }}>Next</button>
+                </div>
+
             </div>
             )}
-
-           
         </div>
     )
 }

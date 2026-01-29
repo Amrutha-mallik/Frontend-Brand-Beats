@@ -59,16 +59,14 @@ export default function Projectview(){
             </div>
 
             <div className="button-section">
-                {!openForm && (
-                    <button
-                        onClick={() => setOpenForm(true)}
-                        className="send-proposal-btn"
-                    >
-                        Send Proposal
-                    </button>
-                )}
+                {singleProject.status === "Open" && !singleProject.producerId ? (
+                    !openForm && (<button onClick={() => setOpenForm(true)} className="send-proposal-btn">
+                        Send Proposal</button>)
+                        ) : (
+                        <p style={{ color: "red", fontWeight: "500" }}>
+                            Proposals are closed 🚫</p>
+                        )}
             </div>
-
             {openForm && (
                 <div className="proposal-form-wrapper">
                     <Proposal

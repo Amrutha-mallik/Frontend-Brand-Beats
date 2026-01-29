@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react";
-import {fetchproposal} from "../slice/brand-slice"
+import {fetchbrand} from "../slice/producer-slice"
 import {useParams } from "react-router-dom"
 import UserContext from "../context/userContext";
 import { useSelector, useDispatch} from "react-redux";
@@ -8,6 +8,16 @@ import { useSelector, useDispatch} from "react-redux";
 export default function Brand() {
    const {user } = useContext(UserContext)
        const isApproved = user?.isApproved
+
+      const{projects} = useSelector((state)=>{
+        return state.Producer
+    })
+
+      const dispatch = useDispatch()
+
+      useEffect(()=>{
+        dispatch(fetchbrand())
+    },[])
 
   return (
     <div>
@@ -20,6 +30,31 @@ export default function Brand() {
             </p>
           )}
         <br/>
+        <table border = "1">
+          <tr>
+            <th> #</th>
+            <th> TITLE</th>
+            <th> GENRE</th>
+            <th> DEADLINE</th>
+            <th> BUDGET</th>
+            <th> STATUS</th>
+            <th> Assigned Producer</th>
+          </tr>
+          {projects.map((ele, i)=>{
+            return(
+              <tr>
+                <td>{i+1}</td>
+                <td>{ele.title}</td>
+                <td>{ele.genre}</td>
+                <td> {ele.deadline? new Date(ele.deadline).toLocaleDateString("en-GB") : "—"}</td>
+                <td>{ele.budget}</td>
+                <td> {ele.status}</td>
+                <td>{ele.producerId?.name || "Not Assigned"}</td>
+              </tr>
+            )
+          })}
+        </table>
+
        
       </div>
     </div>

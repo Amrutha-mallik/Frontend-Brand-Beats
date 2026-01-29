@@ -39,6 +39,11 @@ export default function ProjectProposal({projectId, proposalId }){
     return (
         <div>
             <h2> proposals - {proposal.length}</h2>
+
+            {!proposal || proposal.length ==0 ? (
+                <p> No proposal have been received for this project </p>
+            ) :(
+                <>
             {proposal.map((ele)=>{
                 return(
                 <div key={ele._id} style={{ border: "1px solid #ccc", padding: "12px", marginBottom: "10px" }}>
@@ -65,7 +70,7 @@ export default function ProjectProposal({projectId, proposalId }){
                 <p>
                 <b>Resume:</b>{" "}
                 <a
-                href={`https://docs.google.com/gview?url=${ele.proposalResume[0].url}&embedded=true`}
+                href={ele.proposalResume[0].url}
                 target="_blank"
                 rel="noreferrer">View Resume</a>
 
@@ -80,6 +85,8 @@ export default function ProjectProposal({projectId, proposalId }){
                 </div>
                 )
             })}
+            </>
+        )}
 
         </div>
     )

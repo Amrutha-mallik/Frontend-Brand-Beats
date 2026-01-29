@@ -1,13 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchbrand } from "../slice/producer-slice";
 import {Link} from "react-router-dom"
 import ProjectProposal from "./ProjectProposal"
+const ITEMS_PER_PAGE = 3
 
 export default function MyProject() {
   const dispatch = useDispatch();
   const { projects, isLoading } = useSelector((state) => state.Producer);
 
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+
+  const currentProjects = projects.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE
+  );
+
+  const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE)
   
   useEffect(() => {
     dispatch(fetchbrand());
@@ -28,14 +39,12 @@ export default function MyProject() {
         </div>
       ) : (
         <div style={{ display: "grid", gap: "10px" }}>
-          {projects.map((project) => (
+          {currentProjects.map((project) => (
             <div
               key={project._id}
               style={{
                 background: "#ffffff",
                 border: "1px solid #e5e7eb",
-                // WebkitLineClamp: 2,     // 👈 change to 1, 2, or 3 lines
-                // WebkitBoxOrient: "vertical",
                 borderRadius: "5px",
                 padding: "10px",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
@@ -97,7 +106,6 @@ export default function MyProject() {
                       upload files
                     </button>
                   </Link>                  
-
                   </>
                 ) : (
                   <button 
@@ -116,10 +124,40 @@ export default function MyProject() {
                   </button>
                 )}
               </div>
-
-              
             </div>
           ))}
+        </div>
+      )}
+      {projects.length > ITEMS_PER_PAGE && (
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "16px",
+          marginTop: "24px"
+          }}>
+            
+            <button disabled={currentPage === 1}onClick={() => setCurrentPage(currentPage - 1)}
+            style={{
+              padding: "8px 14px",
+              borderRadius: "6px",
+              border: "none",
+              background: "#0b87c1",
+              color: "white",
+              cursor: "pointer",
+              opacity: currentPage === 1 ? 0.5 : 1
+            }}>Prev </button>
+            <span style={{ fontWeight: "600", color: "#555" }}> Page {currentPage} of {totalPages} </span>
+            <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}
+            style={{
+              padding: "8px 14px",
+              borderRadius: "6px",
+              border: "none",
+              background: "#0b87c1",
+              color: "white",
+              cursor: "pointer",
+              opacity: currentPage === totalPages ? 0.5 : 1
+            }}>Next</button>
         </div>
       )}
     </div>

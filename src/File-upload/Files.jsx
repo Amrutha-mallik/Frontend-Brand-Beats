@@ -38,7 +38,7 @@ export default function Files( producerId ){
             <h2>  Files </h2>
             <input  type="file" ref={fileInputRef}  onChange={(e) =>{setFiles(e.target.files[0])}}/>
 
-            <button onClick={handleupload} disabled={isLoading}>UpLoad files</button>
+            <button onClick={handleupload} disabled={isLoading}>Upload files</button>
             <h3>Uploaded Files </h3>
             {data.length == 0  ? (<p> No uploaded Files</p>) :(
                 <ul>
