@@ -30,6 +30,11 @@ export default function Brand() {
             </p>
           )}
         <br/>
+
+        {isApproved && (
+          <>
+        
+        
         <table border = "1">
           <tr>
             <th> #</th>
@@ -54,8 +59,8 @@ export default function Brand() {
             )
           })}
         </table>
-
-       
+        </>
+        )}
       </div>
     </div>
   );

@@ -1,54 +1,48 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UserContext from "../context/userContext"
-import {myproposal} from "../slice/brand-slice"
-
+import UserContext from "../context/userContext";
+import { myproposal } from "../slice/brand-slice";
 
 export default function Producer() {
-  
-  const {user } = useContext(UserContext)
-  const dispatch = useDispatch()
-  const {proposal} = useSelector((state)=>{
-    return state.Brand
-  })
+  const { user } = useContext(UserContext);
+  const dispatch = useDispatch();
 
-   useEffect(()=>{
-      dispatch(myproposal())
-    },[])
+  const { proposal } = useSelector((state) => state.Brand);
 
+  useEffect(() => {
+    dispatch(myproposal());
+  }, [dispatch]);
 
   return (
-    <div>
+    <div style={{ padding: "20px", maxWidth: "1200px", margin: "0 auto" }}>
+      <h3>Welcome {user?.name}</h3>
 
-      <div style={{ padding: "20px", maxWidth: "1200px", margin: "0 auto" }}>
-        <h3> {user?.name} Welcome to  Dashboard</h3>
-        <p>Browse and submit proposals for projects.</p>
-        <br/>
-        <br/>
-
-        <table border = "1">
+      <p> Browse and submit proposals for projects. </p>
+      {proposal && proposal.length > 0 ? (
+        <table border="1" width="100%">
           <thead>
-             <tr>
+            <tr>
               <th>#</th>
-            <th>Project Name</th>
-            <th>Brand Email</th>
-            <th>Status</th>
-          </tr>
+              <th>Brand Name</th>
+              <th>Project Name</th>
+              <th>Status</th>
+            </tr>
           </thead>
           <tbody>
-            {proposal.map((ele, i)=>{
-              return(
-                <tr>
-                  <td> {i+1}</td>
-                  <td>{ele.projectId.title}</td>
-                  <td> {ele.projectId.email}</td>
-                  <td>{ele.status}</td>
-                </tr>
-              )
-            })}
+            {proposal.map((ele, i) => (
+              <tr key={ele._id || i}>
+                <td>{i + 1}</td>
+                <td>{ele.projectId?.email}</td>
+                <td>{ele.projectId?.title}</td>
+                <td>{ele.status}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
-      </div>
+      ) : (
+
+        <h4> No proposals found </h4>
+      )}
     </div>
   );
 }

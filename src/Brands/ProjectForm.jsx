@@ -144,7 +144,7 @@ export default function ProjectForm() {
           </div>
         </div>
 
-        <div style={{ marginBottom: 10 }}>
+        {/* <div style={{ marginBottom: 10 }}>
           <label style={{ display: "block", fontWeight: 600 }}>Attachments (optional)</label>
           <input
             type="file"
@@ -152,7 +152,7 @@ export default function ProjectForm() {
             onChange={(e) =>
             setProject({ ...project, attachments:Array.from(e.target.files) })}
           />
-        </div>
+        </div> */}
 
 
         <div style={{ marginBottom: 10 }}>

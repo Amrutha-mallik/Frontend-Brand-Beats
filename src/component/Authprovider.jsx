@@ -2,6 +2,8 @@ import UserContext from "../context/userContext"
 import { useReducer, useEffect } from "react"
 import axios from "../config/a"
 import {  useNavigate } from "react-router-dom"
+import Swal from "sweetalert2"
+
 
 
 export default function AuthProvider(props){
@@ -57,13 +59,17 @@ export default function AuthProvider(props){
             try{
                 const response = await axios.post("/users/register", formdata)
                 console.log(response.data)
-                alert("succefully register")
+                 Swal.fire({
+                    icon: "success",
+                    title: "Registered Successfully",
+                    text: "Please login to continue",
+                })
                 userDispatch({type:"SERVER_ERROR", payload:""})
                 navigate("/login")
     
             }catch(err){
-                // console.log( "register", err.response.data)
-                userDispatch({type:"SERVER_ERROR", payload:err.response.data.error})
+                console.log( "register", err.response.data)
+                userDispatch({type:"SERVER_ERROR", payload:err.response.data?.error})
             }
         }
 
@@ -75,7 +81,12 @@ export default function AuthProvider(props){
             
             const userResponse = await axios.get('/users/account', {headers:{Authorization:response.data.token}})
             const role = userResponse.data.role;
-            alert("successfully logged in")
+            Swal.fire({
+            icon: "success",
+            title: "Login Successful",
+            timer: 1000,
+            showConfirmButton: false
+        })
             userDispatch({type:"LOG_IN", payload:userResponse.data})
 
             if(role == "admin"){

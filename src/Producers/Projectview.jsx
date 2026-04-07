@@ -3,6 +3,7 @@ import {fetchOneProject} from "../slice/producer-slice"
 import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Proposal from "../Producers/Proposal"
 import "../Styles/projectview.css"
 
@@ -11,6 +12,8 @@ export default function Projectview(){
 
     const dispatch = useDispatch()
     const { id } = useParams()
+
+    const navigate = useNavigate()
 
     const {singleProject, isLoading} = useSelector((state)=>{
         return state.Producer
@@ -67,6 +70,7 @@ export default function Projectview(){
                             Proposals are closed 🚫</p>
                         )}
             </div>
+            <button onClick={() => navigate("/producer/browseprojects")}> cancel </button>
             {openForm && (
                 <div className="proposal-form-wrapper">
                     <Proposal

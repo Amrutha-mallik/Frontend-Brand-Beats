@@ -26,7 +26,7 @@ export default function BrandLayout() {
           <NavLink to="dashboard" className="side-link">Dashboard</NavLink>
           <NavLink to={isApproved ? "createproject" : "#"} className={disabledLink}>Create Project</NavLink>
           <NavLink to={isApproved ? "myproject" : "#"}className={disabledLink}>My Projects</NavLink>
-          <NavLink to={isApproved ? "uploadedfiles" : "#"}className={disabledLink}>Uploaded Files</NavLink>
+          {/* <NavLink to={isApproved ? "uploadedfiles" : "#"}className={disabledLink}>Uploaded Files</NavLink> */}
           <NavLink to="profile" className="side-link">Profile</NavLink>
           <button
           onClick={handleLogoutClick}
