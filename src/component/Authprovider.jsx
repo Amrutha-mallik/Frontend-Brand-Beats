@@ -4,8 +4,6 @@ import axios from "../config/a"
 import {  useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
 
-
-
 export default function AuthProvider(props){
     const navigate = useNavigate()
 

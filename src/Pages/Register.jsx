@@ -33,7 +33,7 @@ const validationSchema = Yup.object().shape({
 export default function Register(props){
   const [showPassword, setShowPassword] = useState(false)
   const [adminExists, setAdminExists] = useState(null)
-  const {handleregister ,serverError} = useContext(UserContext)
+  const { handleregister, serverError} = useContext(UserContext)
 
   const formik = useFormik({
     initialValues: {
