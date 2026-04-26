@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
-import {AuthProvider} from './component/AuthProvider.jsx'
+import Authprovider from './component/Authprovider.jsx'
 import createStore from "./create-store/store.js"
 import { Provider } from "react-redux";
 const store = createStore();
